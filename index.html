@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<title>DashBoard</title>
+	<style>
+		html {
+			font-family: Arial;
+			display: inline-block;
+			margin: 0px auto;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: .10rem;
+			color: #33ffbd;
+		}
+
+		.buttonON {
+			display: inline;
+			padding: 10px 20px;
+			font-size: 12px;
+
+			font-weight: bold;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			outline: none;
+			color: #080808;
+			background-color: #1ed13f;
+			border: none;
+			border-radius: 15px;
+			box-shadow: 0 5px #999;
+		}
+
+		.buttonON:hover {
+			background-color: #3e8e41
+		}
+
+		.buttonON:active {
+			background-color: #3e8e41;
+			box-shadow: 0 1px #666;
+			transform: translateY(4px);
+		}
+
+		.buttonOFF {
+			display: inline-block;
+			padding: 10px 20px;
+			font-size: 12px;
+			font-weight: bold;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			outline: none;
+			color: #fff;
+			background-color: #e7cd3c;
+			border: none;
+			border-radius: 15px;
+			box-shadow: 0 5px #999;
+		}
+
+		.buttonOFF:hover {
+			background-color: #c0392b
+		}
+
+		.buttonOFF:active {
+			background-color: #c0392b;
+			box-shadow: 0 1px #646;
+			transform: translateY(4px);
+		}
+
+		.text {
+			text-align: center;
+			font-size: 5px;
+			width: 120px;
+			height: 22px;
+			border: 3px solid #ca148b;
+			border-radius: 10px;
+			padding: 2px;
+			margin-bottom: 8px;
+
+			-webkit-transition: border 5s ease-in-out, box-shadow 5s ease-in-out;
+			-moz-transition: border 5s ease-in-out, box-shadow 5s ease-in-out;
+			-ms-transition: border 5s ease-in-out, box-shadow 5s ease-in-out;
+			-o-transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+			transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+		}
+
+		.text:focus {
+			border: 3px solid #8e44ad;
+			box-shadow: 0 0 7px #8e44ad;
+			outline: none;
+		}
+
+		.logform {
+			color: #2a28a8;
+			font-weight: bold;
+			font-family: "Courier New"monospace;
+			font-stretch: condensed;
+			font-style: inherit;
+			font-size: 10px;
+
+			width: 800px;
+			height: 200px;
+			border: 1px solid black;
+			display: flex;
+			align-items: left;
+			padding: 8px;
+			/* padding-left: 80px;*/
+			margin: 20px;
+			/* flex-wrap: wrap*/
+			
+
+		}
+
+		#mainBody {
+			width: 100%;
+			height: 90vh;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: space-between;
+			background-color: rgb(230, 223, 163);
+		}
+
+		#stborder {
+			background-color: rgb(165, 199, 212);
+			width: 33%;
+			height: 80%;
+			border: 5px solid rgb(180, 172, 96);
+			margin-bottom:auto;
+			
+			border-radius: 10px;
+		}
+
+		#rdborder {
+			background-color: rgb(165, 199, 212);
+			width: 33%;
+			height: 80%;
+			border: 5px solid rgb(180, 172, 96);
+			padding: 8px;
+			border-radius: 10px;
+		}
+
+		#ndborder {
+			background-color: rgb(165, 199, 212);
+			width: 33%;
+			height: 80%;
+			border: 5px solid rgb(180, 172, 96);
+			padding: 8px;
+
+			border-radius: 10px;
+		}
+
+		#menu {
+			background-color: #6CF;
+			float: left;
+			height: 300px;
+			width: 340px;
+		}
+
+		.boxer {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.minor {
+			background-color: #00ff00;
+		}
+
+		.textStatus {
+			text-align: center;
+			font-size: 12px;
+			font-family: verdana;
+			font-size: 20px;
+		}
+
+		#status {
+			width: 70%;
+			height: 8%;
+			border: 5px;
+			border-radius: 5px;
+			padding-bottom:-10%;
+			margin-bottom:-25% ;
+		}
+
+		.major {
+			background-color: rgb(241, 159, 6);
+		}
+
+
+		.critical {
+
+			background-color: red;
+		}
+
+		.graph {
+			margin-top: 3%;
+			width: 100%;
+			height: 60%;
+			/*margin-bottom: 0%;*/
+		}
+
+		.map {
+			margin-top: 0%;
+			width:99%;
+			height:90%;
+			padding:  0% ;
+			
+		}
+        .flow {
+			margin-top:0;	
+			display: flex;
+			width:90%;
+			height:60%;
+			padding-right:0%;
+			margin-right:6% ;
+			overflow-x: hidden;
+            overflow-y: auto;
+			flex-direction:row;
+		   
+			
+			
+			/*padding: 10'% 5% 10% 5% ;*/
+			
+		}
+
+		.heading {
+			color: rgb(15, 17, 17);;
+			text-shadow: 2px 2px 5px rgb(195, 206, 45);
+			font-family: "fantacy", monospace;
+			font-weight:  "bolder";
+			background-color: rgb(180, 172, 96);
+			padding-bottom: 2%;
+			padding-top:2%;
+		    font-size-adjust: 3em; 
+
+		}
+
+		.heading2 {
+			color: rgb(12, 19, 19);
+			text-shadow: 2px 2px 5px rgb(230, 226, 13);
+			font-family: "fantacy", monospace;
+			font-weight:  "bolder";
+			font-size: 1.3em;
+			
+		}
+
+		@media only screen and (max-width: 600px) {
+			#mainBody {
+				display:flex;
+				flex-direction:column;
+				align-items:center;
+			}
+
+			#mainBody div {
+				width: 94%;
+				margin-bottom:10%
+			}
+
+			#mainBody div:first-child {
+				margin-bottom:10%;
+
+			}
+
+			.graph {
+				height: 60%;
+			}
+
+			.flow {
+
+			width:300px;
+			height:200px;
+				
+			/*padding: 10'% 5% 10% 5% ;*/
+			
+		}
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#iotNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <!-- <a class="navbar-brand" href="index.html">IoT Debugger</a> -->
+            </div>
+            <div class="collapse navbar-collapse" id="iotNavBar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="./thingspeak3Timeformat.html">TABLE VIEW</a></li>
+                    <li><a href="./logintemp.html">logOut</a></li>
+                </ul>
+            </div>
+    </nav>
+<div >
+	<h2 class="heading">SEWAGE SYSTEM BLOCKAGE MONITOR</h2>
+	<br>
+	</div>
+
+	<!--- <div id="stborder" >
+         <label for="ts-api-key" >ThingSpeak API: </label><input id="ts-api-key"   type="password"  placeholder="ThingSpeak API Key" class="text"  />
+         <input type="checkbox" onclick="hideapikey()"   >hide API
+   
+        <label for="ts-channel-id">Channel ID :  </label><input id="ts-channel-id" type="password"  placeholder="ThingSpeak API Key" class="text"  />
+         <input type="checkbox" onclick="hidechannelid()" >hide ID
+         
+         </div> --->
+
+	<div id="mainBody">
+		<div id="stborder">
+        	<P class="heading2">water level</P>
+			<iframe width="98%" height="60%" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1038512/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=8&timescale=10&title=graph&type=line&xaxis=time&yaxis=level&yaxismax=90&yaxismin=0"></iframe>
+            
+               
+                <P id="status1"  class="heading2"></P>
+
+
+                <button id="status" type="text"></button>
+		</div>
+		
+		<div id="rdborder">
+			<P class="heading2">flow rates</P>
+
+            <!--<iframe width="450" height="600" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1038512/widgets/171044?update=30&api_key=2CBVE5X5EZ39QFLF"></iframe>
+             width="380" height="400" style="border: 1px solid #cccccc;"
+                <iframe src="https://thingspeak.com/channels/1038512/widgets/208432?width=200 &height=400 &dynamic=true &style=border: 1px solid #cccccc;"></iframe>-->
+
+        
+            <iframe  class="flow"  scrolling="1" style="overflow:visible;"src="https://thingspeak.com/channels/1038512/widgets/208432"></iframe>
+
+		</div>
+
+
+		<div id="ndborder">
+			<P  class="heading2">location </P>
+
+			<iframe class="map"
+				src="https://thingspeak.com/channels/1038512/maps/channel_show?height=800&width=720"></iframe>
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+
+			function hideapikey() {
+				var x = document.getElementById("ts-api-key");
+				if (x.type === "password") {
+					x.type = "text";
+				} else {
+					x.type = "password";
+				}
+			}
+			function hidechannelid() {
+				var x = document.getElementById("ts-channel-id");
+				if (x.type === "password") {
+					x.type = "text";
+				} else {
+					x.type = "password";
+				}
+			}
+
+			GetData()
+		});
+
+
+
+
+
+
+		function GetData() {
+			var url = 'https://api.thingspeak.com/channels/1038512/feeds.json?results=1;'
+			$.ajax
+				({
+					url: url,
+					type: 'GET',
+					contentType: "application/json",
+					dataType: "json",
+					crossDomain: true,
+					success: function (data, textStatus, xhr) {
+
+						$.each(data, function (i, item) {
+ 
+							if (i == 'feeds') {
+								var ubound = item.length;
+
+								var msingi = item[ubound - 1].field1;
+								// var msingi2=item[ubound-1 ].field1;
+								console.log(typeof (msingi));
+								console.log(msingi);
+
+								var msingiNamba = parseInt(msingi);
+
+								if (msingiNamba < 25) {
+									
+									$('#status').removeClass("major");
+								    $('#status').removeClass("critical");
+									$('#status').addClass("minor");
+								
+									var myState = "minor";
+									document.getElementById("status").innerHTML = "Level=" + msingiNamba + "%";
+									document.getElementById("status1").innerHTML = "State=" + myState;
+									console.log(msingi + " is " + myState);
+									//$('#status').val(ubound); var msingi=item[ubound-1 ].field2;
+								}
+								else if ((msingiNamba >= 25) && (msingiNamba < 76)) {
+									$('#status').removeClass("minor");
+								    $('#status').removeClass("critical");
+									$('#status').addClass("major");
+									myState = "major";
+									$('#status').addClass('major');
+									document.getElementById("status").innerHTML = "Overflow=" + msingiNamba + "%";
+									document.getElementById("status1").innerHTML = "Alarm=" + myState;
+									console.log(msingi + " is " + myState);
+
+									//setTimeout(RemoveClass,5000);
+
+								}
+
+								else if (msingiNamba > 75) {
+									$('#status').removeClass("major");
+								    $('#status').removeClass("minor");
+									$('#status').addClass("critical");
+									myState = "critical";
+									$('#status').addClass('critical');
+									document.getElementById("status").innerHTML = "LEVEL=" + msingiNamba + "%";
+									document.getElementById("status1").innerHTML = "STATE=" + myState;
+									console.log(msingi + " is " + myState);
+									//setTimeout(RemoveClass,5000);
+
+								}
+
+							}
+						});
+					},
+					error: function (xhr, textStatus, errorThrown) {
+						alert(errorThrown);
+					}
+				});
+
+			setTimeout(GetData, 15000);
+		}
+
+
+	</script>
+</body>
+</script>
+
+</html>
